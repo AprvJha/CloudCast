@@ -21,7 +21,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { DynamicLogo } from './DynamicLogo';
-import { User, LogOut, Sparkles } from 'lucide-react';
+import { User, LogOut, Sparkles, LayoutDashboard } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 
@@ -57,12 +57,6 @@ export const WeatherApp = () => {
 
   // Initialize app
   useEffect(() => {
-    // Check for API key
-    if (!weatherApi.hasApiKey()) {
-      setShowApiKeyModal(true);
-      return;
-    }
-
     // Load saved temperature unit
     const savedUnit = localStorage.getItem('temperatureUnit') as TemperatureUnit;
     if (savedUnit) {
@@ -151,6 +145,9 @@ export const WeatherApp = () => {
       
       // Cache the data for offline use
       cacheWeatherData(weatherData, forecastData, city);
+      
+      // Save to history for authenticated users
+      weatherApi.saveToHistory(weatherData);
       
       // Save last searched city
       localStorage.setItem('lastSearchedCity', city);
@@ -311,7 +308,7 @@ export const WeatherApp = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="bg-purple-500/10 border-purple-500/20 text-purple-300 hover:bg-purple-500/20"
+                  className="bg-primary/10 border-primary/20 text-primary hover:bg-primary/20"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   AI Summary
@@ -326,21 +323,33 @@ export const WeatherApp = () => {
             <ThemeToggle />
             
             {user ? (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
+              <>
+                <Link to="/dashboard">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
+                  >
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </>
             ) : (
               <Link to="/auth">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
                 >
                   <User className="w-4 h-4 mr-2" />
                   Login
