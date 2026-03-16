@@ -57,12 +57,6 @@ export const WeatherApp = () => {
 
   // Initialize app
   useEffect(() => {
-    // Check for API key
-    if (!weatherApi.hasApiKey()) {
-      setShowApiKeyModal(true);
-      return;
-    }
-
     // Load saved temperature unit
     const savedUnit = localStorage.getItem('temperatureUnit') as TemperatureUnit;
     if (savedUnit) {
