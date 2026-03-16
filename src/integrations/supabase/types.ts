@@ -53,6 +53,51 @@ export type Database = {
         }
         Relationships: []
       }
+      weather_history: {
+        Row: {
+          city: string
+          country: string | null
+          feels_like: number | null
+          humidity: number | null
+          id: string
+          pressure: number | null
+          searched_at: string
+          temperature: number | null
+          user_id: string | null
+          weather_condition: string | null
+          weather_icon: string | null
+          wind_speed: number | null
+        }
+        Insert: {
+          city: string
+          country?: string | null
+          feels_like?: number | null
+          humidity?: number | null
+          id?: string
+          pressure?: number | null
+          searched_at?: string
+          temperature?: number | null
+          user_id?: string | null
+          weather_condition?: string | null
+          weather_icon?: string | null
+          wind_speed?: number | null
+        }
+        Update: {
+          city?: string
+          country?: string | null
+          feels_like?: number | null
+          humidity?: number | null
+          id?: string
+          pressure?: number | null
+          searched_at?: string
+          temperature?: number | null
+          user_id?: string | null
+          weather_condition?: string | null
+          weather_icon?: string | null
+          wind_speed?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
