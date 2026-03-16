@@ -329,21 +329,33 @@ export const WeatherApp = () => {
             <ThemeToggle />
             
             {user ? (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
+              <>
+                <Link to="/dashboard">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
+                  >
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </>
             ) : (
               <Link to="/auth">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="bg-white/10 border-white/20 text-foreground hover:bg-white/20"
                 >
                   <User className="w-4 h-4 mr-2" />
                   Login
