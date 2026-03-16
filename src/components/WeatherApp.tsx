@@ -314,7 +314,7 @@ export const WeatherApp = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="bg-purple-500/10 border-purple-500/20 text-purple-300 hover:bg-purple-500/20"
+                  className="bg-primary/10 border-primary/20 text-primary hover:bg-primary/20"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   AI Summary
