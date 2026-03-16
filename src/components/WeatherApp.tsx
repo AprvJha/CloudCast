@@ -152,6 +152,9 @@ export const WeatherApp = () => {
       // Cache the data for offline use
       cacheWeatherData(weatherData, forecastData, city);
       
+      // Save to history for authenticated users
+      weatherApi.saveToHistory(weatherData);
+      
       // Save last searched city
       localStorage.setItem('lastSearchedCity', city);
       
