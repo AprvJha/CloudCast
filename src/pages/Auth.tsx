@@ -160,30 +160,8 @@ export default function Auth() {
     }
   };
 
-  const PasswordInput = ({ value, onChange, placeholder, show, onToggle }: {
-    value: string; onChange: (v: string) => void; placeholder: string; show: boolean; onToggle: () => void;
-  }) => (
-    <div className="relative">
-      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-      <Input
-        type={show ? 'text' : 'password'}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="pl-10 pr-10"
-        required
-      />
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        onClick={onToggle}
-        className="absolute right-1 top-1 h-8 w-8 p-0"
-      >
-        {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-      </Button>
-    </div>
-  );
+
+
 
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-6">
