@@ -191,7 +191,8 @@ export default function Auth() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-hero relative flex items-center justify-center p-6">
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Button variant="ghost" className="mb-4 text-foreground hover:bg-white/10" onClick={() => navigate('/')}>
