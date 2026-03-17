@@ -9,6 +9,33 @@ import { toast } from '@/hooks/use-toast';
 import { Loader2, Mail, Lock, User, ArrowLeft, Eye, EyeOff, Check, X } from 'lucide-react';
 import cloudcastLogo from '@/assets/cloudcast-logo.png';
 
+function PasswordInput({ value, onChange, placeholder, show, onToggle }: {
+  value: string; onChange: (v: string) => void; placeholder: string; show: boolean; onToggle: () => void;
+}) {
+  return (
+    <div className="relative">
+      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+      <Input
+        type={show ? 'text' : 'password'}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="pl-10 pr-10"
+        required
+      />
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={onToggle}
+        className="absolute right-1 top-1 h-8 w-8 p-0"
+      >
+        {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+      </Button>
+    </div>
+  );
+}
+
 interface PasswordStrength {
   score: number;
   label: string;
