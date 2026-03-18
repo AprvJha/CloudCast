@@ -1,55 +1,84 @@
-# Welcome to your Lovable project
+# CloudCast — Weather Dashboard
 
-## Project info
+**URL**: [https://cloudcast.lovable.app/](https://cloudcast.lovable.app/)
 
-**URL**: https://cloudcast.lovable.app/
+CloudCast is a modern, feature-rich weather dashboard built with React, TypeScript, and Supabase. It provides real-time weather data, forecasts, and a personalized user experience.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Features
 
-**Use your preferred IDE**
+- **Real-time Weather** — Search any city or use geolocation for current conditions
+- **5-Day Forecast** — Hourly and daily forecast charts powered by Recharts
+- **User Authentication** — Email/password and Google OAuth via Supabase Auth
+- **Password Strength Meter** — Real-time feedback on signup password security
+- **User Dashboard** — Favorite cities, search history, and preference management
+- **Temperature Toggle** — Switch between Celsius and Fahrenheit
+- **Dark/Light Theme** — Persistent theme preference
+- **Voice Search** — Search for cities using voice input
+- **Offline Support** — Cached weather data available offline
+- **Responsive Design** — Works on desktop, tablet, and mobile
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Recent Changes
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Auth Page Readability Fix
+- Added a semi-transparent overlay (`bg-background/60`) with `backdrop-blur-sm` behind the auth forms to prevent text from blending into the gradient background.
+- Auth card uses glassmorphism styling (`backdrop-blur-md bg-card/80 border-white/20`) for improved contrast and readability.
 
-Follow these steps:
+### Input Focus Bug Fix
+- Moved the `PasswordInput` component definition **outside** of the `Auth` component to prevent React from re-mounting the input on every keystroke, which was causing the text box to lose focus after typing a single character.
+
+### Signup Database Error Fix
+- Updated the `handle_new_user` Supabase trigger function to use `SECURITY DEFINER`, allowing it to bypass Row-Level Security (RLS) when creating initial `user_preferences` records during signup.
+
+---
+
+## Tech Stack
+
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Backend**: Supabase (Auth, Database, Edge Functions)
+- **Charts**: Recharts
+- **Routing**: React Router v6
+- **State**: TanStack React Query
+
+## Getting Started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Navigate to the project directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Environment Variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The app requires the following environment variables (see `.env`):
 
-**Use GitHub Codespaces**
+| Variable | Description |
+|---|---|
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/public key |
+| `VITE_SUPABASE_PROJECT_ID` | Supabase project ID |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/       # Reusable UI components
+├── hooks/            # Custom React hooks
+├── integrations/     # Supabase client & types
+├── pages/            # Route pages (Index, Auth, Dashboard, etc.)
+├── services/         # API services (weatherApi)
+├── types/            # TypeScript type definitions
+└── utils/            # Utility functions
+supabase/
+├── functions/        # Edge Functions (weather-proxy)
+└── migrations/       # Database migrations
+```
